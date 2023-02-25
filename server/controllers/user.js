@@ -36,4 +36,43 @@ userRouter.post("/signup", async (req, res, next) => {
   }
 });
 
+userRouter.post("/signin", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ msg: "All fields are required!" });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ msg: "User not found!" });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({ msg: "Invalid credentials!" });
+    }
+
+    req.session.isAuth = true;
+    req.session.username = user.username;
+
+    res.status(200).json({ msg: "Successfully logged in." });
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.post("/logout", (req, res) => {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({ msg: err.message });
+    } else {
+      return res.status(200).json({ msg: "Logout successfully." });
+    }
+  });
+});
+
 module.exports = userRouter;
