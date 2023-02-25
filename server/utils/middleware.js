@@ -16,7 +16,16 @@ const errorHandler = (err, req, res, next) => {
   next(err);
 };
 
+const isAuthenticated = (req, res, next) => {
+  if (req.session.isAuth) {
+    next();
+  } else {
+    return res.status(401).json({ msg: "Authentication error!" });
+  }
+};
+
 module.exports = {
   unknownEndPoint,
   errorHandler,
+  isAuthenticated,
 };

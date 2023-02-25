@@ -29,6 +29,8 @@ app.use(
   })
 );
 
+app.use(middleware.isAuthenticated);
+
 app.use("/api/user", userController);
 
 app.use(middleware.unknownEndPoint);
