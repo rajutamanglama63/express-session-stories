@@ -19,10 +19,8 @@ const storySchema = new mongoose.Schema({
   },
   likes: [
     {
-      user: {
-        type: mongoose.Schema.Types.String,
-        ref: "user",
-      },
+      type: mongoose.Schema.Types.String,
+      ref: "user",
     },
   ],
   comments: [
@@ -51,8 +49,6 @@ storySchema.set("toJSON", {
     returnObject.id = returnObject._id.toString();
     delete returnObject._id;
     delete returnObject.__v;
-
-    delete returnObject.password;
   },
 });
 

@@ -26,6 +26,8 @@ storyRouter.post(
 
       const user = await User.findOne({ username: req.session.username });
 
+      console.log("userStories: ", user);
+
       user.stories.unshift(newStory.id);
 
       await user.save();
@@ -54,6 +56,11 @@ storyRouter.get(
           msg: "Story not found, unsuccessful attempt!",
         });
       }
+
+      // const userLiked = story.likes.find(
+      //   (user) => user.username === req.session.username
+      // );
+      // console.log("userLiked: ", userLiked);
 
       if (story.likes.includes(req.session.username)) {
         const index = story.likes.indexOf(req.session.username);

@@ -2,6 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 
 const User = require("../models/User");
+const middleware = require("../utils/middleware");
 
 const userRouter = express.Router();
 
@@ -57,9 +58,26 @@ userRouter.post("/signin", async (req, res, next) => {
     }
 
     req.session.isAuth = true;
+    req.session.id = user.id;
     req.session.username = user.username;
 
-    res.status(200).json({ msg: "Successfully logged in." });
+    res.status(200).json({
+      success: true,
+      msg: "Successfully logged in.",
+      user: user.username,
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+userRouter.get("/:id", async (req, res, next) => {
+  try {
+    const user = await User.findById(req.params.id).populate("stories");
+
+    console.log("logged user: ", user);
+
+    res.status(200).json({ success: true, user: user });
   } catch (error) {
     next(error);
   }
