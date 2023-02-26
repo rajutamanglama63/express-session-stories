@@ -1,6 +1,7 @@
 const express = require("express");
 
 const Story = require("../models/Story");
+const User = require("../models/User");
 const middleware = require("../utils/middleware");
 
 const storyRouter = express.Router();
@@ -22,6 +23,12 @@ storyRouter.post(
       });
 
       await newStory.save();
+
+      const user = await User.findOne({ username: req.session.username });
+
+      user.stories.unshift(newStory.id);
+
+      await user.save();
 
       res.status(201).json({
         success: true,
