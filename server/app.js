@@ -6,6 +6,7 @@ const MongoDBStore = require("connect-mongodb-session")(session);
 const config = require("./utils/config");
 const middleware = require("./utils/middleware");
 const userController = require("./controllers/user");
+const storyController = require("./controllers/story");
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use(
 );
 
 app.use("/api/user", userController);
+app.use("/api/story", storyController);
 
 app.use(middleware.unknownEndPoint);
 

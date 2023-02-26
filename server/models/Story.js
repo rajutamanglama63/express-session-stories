@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
 
-const storySchema = new Schema({
+const storySchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,
@@ -10,6 +9,10 @@ const storySchema = new Schema({
     type: String,
     required: true,
   },
+  storyTeller: {
+    type: mongoose.Schema.Types.String,
+    ref: "user",
+  },
   date: {
     type: Date,
     default: Date.now(),
@@ -17,7 +20,7 @@ const storySchema = new Schema({
   likes: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.String,
         ref: "user",
       },
     },
@@ -25,7 +28,7 @@ const storySchema = new Schema({
   comments: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.String,
         ref: "user",
       },
       username: {
@@ -41,6 +44,16 @@ const storySchema = new Schema({
       },
     },
   ],
+});
+
+storySchema.set("toJSON", {
+  transform: (document, returnObject) => {
+    returnObject.id = returnObject._id.toString();
+    delete returnObject._id;
+    delete returnObject.__v;
+
+    delete returnObject.password;
+  },
 });
 
 const Story = mongoose.model("story", storySchema);
