@@ -142,6 +142,53 @@ storyRouter.put(
   }
 );
 
+// adding plus updating comment
+storyRouter.post(
+  "/comment/:id",
+  middleware.isAuthenticated,
+  async (req, res, next) => {
+    try {
+      const story = await Story.findById(req.params.id);
+
+      if (!story) {
+        return res
+          .status(404)
+          .json({ success: false, msg: "Story not found!" });
+      }
+
+      let indexOfComment = -1;
+
+      story.comments.forEach((comment, index) => {
+        if (comment.user === req.session.id) {
+          indexOfComment = index;
+        }
+      });
+
+      if (indexOfComment !== -1) {
+        story.comments[indexOfComment] = req.body.comment;
+
+        await story.save();
+
+        return res
+          .status(200)
+          .json({ success: true, msg: "Comment updated successfully." });
+      } else {
+        story.comments.push({
+          user: req.session.id,
+          comment: req.body.comment,
+        });
+        await story.save();
+
+        return res
+          .status(201)
+          .json({ success: true, msg: "Comment added successfully." });
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 storyRouter.get("/", async (req, res, next) => {
   try {
     const stories = await Story.find();
