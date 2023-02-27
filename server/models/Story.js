@@ -29,11 +29,7 @@ const storySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.String,
         ref: "user",
       },
-      username: {
-        type: String,
-        required: true,
-      },
-      textOfComment: {
+      comment: {
         type: String,
       },
       date: {

@@ -57,11 +57,6 @@ storyRouter.get(
         });
       }
 
-      // const userLiked = story.likes.find(
-      //   (user) => user.username === req.session.username
-      // );
-      // console.log("userLiked: ", userLiked);
-
       if (story.likes.includes(req.session.username)) {
         const index = story.likes.indexOf(req.session.username);
 
@@ -77,6 +72,40 @@ storyRouter.get(
 
         return res.status(200).json({ success: true, msg: "Story liked." });
       }
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+storyRouter.delete(
+  "/delete/:id",
+  middleware.isAuthenticated,
+  async (req, res, next) => {
+    try {
+      const story = await Story.findById(req.params.id);
+
+      if (!story) {
+        return res
+          .status(404)
+          .json({ success: false, msg: "Story not found!" });
+      }
+
+      if (story.storyTeller !== req.session.username) {
+        return res.status(401).json({ success: false, msg: "Unauthorized!" });
+      }
+
+      await story.remove();
+
+      const user = await User.findById(req.session.id);
+
+      const index = user.stories.indexOf(req.params.id);
+
+      user.stories.splice(index, 1);
+
+      await user.save();
+
+      res.status(200).json({ success: true, msg: "Successfully deleted." });
     } catch (error) {
       next(error);
     }
