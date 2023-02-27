@@ -98,9 +98,9 @@ storyRouter.delete(
 
       await story.remove();
 
-      const user = await User.findById(req.session.id);
+      const user = await User.findOne({ username: req.session.username });
 
-      const index = user.stories.indexOf(req.params.id);
+      const index = user.stories.indexOf(story.id);
 
       user.stories.splice(index, 1);
 
