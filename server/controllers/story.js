@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 
 const Story = require("../models/Story");
 const User = require("../models/User");
@@ -159,13 +160,13 @@ storyRouter.put(
       let indexOfComment = -1;
 
       story.comments.forEach((comment, index) => {
-        if (comment.user === req.session.id) {
+        if (comment.user === req.session.username) {
           indexOfComment = index;
         }
       });
 
       if (indexOfComment !== -1) {
-        story.comments[indexOfComment] = req.body.comment;
+        story.comments[indexOfComment].comment = req.body.comment;
 
         await story.save();
 
@@ -174,7 +175,7 @@ storyRouter.put(
           .json({ success: true, msg: "Comment updated successfully." });
       } else {
         story.comments.push({
-          user: req.session.id,
+          user: req.session.username,
           comment: req.body.comment,
         });
         await story.save();
@@ -205,7 +206,7 @@ storyRouter.delete(
           .json({ success: false, msg: "Story not found!" });
       }
 
-      if (story.id === req.session.id) {
+      if (story.storyTeller === req.session.username) {
         if (req.body.commentId === undefined) {
           return res
             .status(400)
@@ -225,7 +226,7 @@ storyRouter.delete(
           .json({ success: true, msg: "Selected comment has deleted." });
       } else {
         story.comments.forEach((comment, index) => {
-          if (comment.user === req.session.id) {
+          if (comment.user === req.session.username) {
             return story.comments.splice(index, 1);
           }
         });

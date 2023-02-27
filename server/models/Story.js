@@ -26,7 +26,7 @@ const storySchema = new mongoose.Schema({
   comments: [
     {
       user: {
-        type: mongoose.Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.String,
         ref: "user",
       },
       comment: {
