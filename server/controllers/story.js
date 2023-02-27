@@ -112,6 +112,36 @@ storyRouter.delete(
   }
 );
 
+storyRouter.put(
+  "/update/:id",
+  middleware.isAuthenticated,
+  async (req, res, next) => {
+    try {
+      const story = await Story.findById(req.params.id);
+
+      if (!story) {
+        return res
+          .status(404)
+          .json({ success: false, msg: "Story not found!" });
+      }
+
+      if (story.storyTeller !== req.session.username) {
+        return res.status(401).json({ success: false, msg: "Unauthorized!" });
+      }
+
+      const { title, content } = req.body;
+
+      const updatedStory = { title, content };
+
+      await Story.findByIdAndUpdate(story.id, updatedStory, { new: true });
+
+      res.status(200).json({ success: true, msg: "Successfully updated." });
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
 storyRouter.get("/", async (req, res, next) => {
   try {
     const stories = await Story.find();
