@@ -192,45 +192,54 @@ storyRouter.put(
 // delete comment
 // 1. logged in user or owner of post can delete each and every comment of it's post
 // 2. any user can delete his/her comment in other's post but he/she can not delete comment of other user
-storyRouter.delete("/delete/comment/:id", middleware.isAuthenticated, async (req, res, next) => {
-  try {
-    const story = await Story.findById(req.params.id);
+storyRouter.delete(
+  "/delete/comment/:id",
+  middleware.isAuthenticated,
+  async (req, res, next) => {
+    try {
+      const story = await Story.findById(req.params.id);
 
-    if (!story) {
-      return res
-        .status(404)
-        .json({ success: false, msg: "Story not found!" });
-    }
-
-    if(story.id === req.session.id) {
-      if(req.body.commentId === undefined) {
-        return res.status(400).json({success: false, msg: "Comment id is required!"})
+      if (!story) {
+        return res
+          .status(404)
+          .json({ success: false, msg: "Story not found!" });
       }
 
-      story.comments.forEach((comment, index) => {
-        if(comment._id.toString() === req.body.commentId.toString()) {
-          return story.comments.splice(index, 1)
+      if (story.id === req.session.id) {
+        if (req.body.commentId === undefined) {
+          return res
+            .status(400)
+            .json({ success: false, msg: "Comment id is required!" });
         }
+
+        story.comments.forEach((comment, index) => {
+          if (comment._id.toString() === req.body.commentId.toString()) {
+            return story.comments.splice(index, 1);
+          }
+        });
 
         await story.save();
 
-          return res.status(200).json({success : true, msg : "Selected comment has deleted."})
-      })
-    } else {
-      story.comments.forEach((comment, index) => {
-        if(comment.user === req.session.id) {
-          return story.comments.splice(index, 1)
-        }
-
+        return res
+          .status(200)
+          .json({ success: true, msg: "Selected comment has deleted." });
+      } else {
+        story.comments.forEach((comment, index) => {
+          if (comment.user === req.session.id) {
+            return story.comments.splice(index, 1);
+          }
+        });
         await story.save();
 
-        return res.status(200).json({success : true, msg : "Your comment has deleted."});
-      })
+        return res
+          .status(200)
+          .json({ success: true, msg: "Your comment has deleted." });
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error)
   }
-})
+);
 
 storyRouter.get("/", async (req, res, next) => {
   try {
