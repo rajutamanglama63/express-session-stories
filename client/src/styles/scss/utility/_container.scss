@@ -4,3 +4,11 @@
         margin: 0 auto;
     }
 }
+
+.container-tn{
+    @include breakpoint-down(small) {
+        width: 90%;
+        margin: 0 auto;
+        }
+    
+  }
