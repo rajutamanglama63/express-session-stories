@@ -1,0 +1,74 @@
+.primary-button {
+    // padding: 0 6.5rem;
+    width: 100%;
+    background-color: $primary-color;
+    color: $light-color;
+    border: 1px solid $primary-color;
+    // text-decoration: none;
+    font-size: $h5;
+    &:hover {
+      background-color: $primary-color-dark;
+    }
+  }
+  
+  .secondary-button {
+    padding: 0.5rem 3rem;
+    // border: 1px solid #000;
+    border: none;
+    background-color: $primary-color;
+    color: $light-color;
+    font-size: $paragraph;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover{
+        opacity: 0.5;
+    }
+  }
+  
+  
+  .btn{
+    border: none;
+      background-color: $primary-color;
+      color: $light-color;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      &:hover{
+        opacity: 0.5;
+      }
+  }
+  
+  .btn-del{
+    color: $secondary_color;
+  }
+  
+  .btn-edit{
+    color: $primary-color;
+  }
+
+  .member-btn {
+    border: none;
+      background-color: $primary-color;
+      color: $light-color;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    
+    &:hover {
+      background-color: $primary-color-dark;
+    }
+  }
+
+  .learn-btn {
+    border: none;
+    width: 50%;
+      background-color: $primary-color;
+      color: $light-color;
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    
+    &:hover {
+      background-color: $primary-color-dark;
+    }
+  }
