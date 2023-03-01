@@ -24,7 +24,7 @@ const Login = () => {
             Login
           </button>
           <p className="region-margin-tn">
-            Not registered yet? <Link to="/">Register</Link>
+            Not registered yet? <Link to="/register">Register</Link>
           </p>
         </form>
       </div>
