@@ -1,21 +1,32 @@
 import { Icon } from "@iconify/react";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Drawer = ({ open, handleClose }) => {
+  const navigate = useNavigate();
   const sideDrawerClass = ["side_drawer"];
 
   if (open) {
     sideDrawerClass.push("show");
   }
 
+  const homeNavigater = () => {
+    navigate("/");
+    handleClose();
+  };
+
+  const profileNavigater = () => {
+    navigate("/profile/:id");
+    handleClose();
+  };
+
   return (
     <div className={sideDrawerClass.join(" ")}>
       <ul className="drawer_list">
-        <li className="drawer_list_item">
+        <li className="drawer_list_item" onClick={homeNavigater}>
           <Icon icon="material-symbols:home" />
           <span className="drawer_list_item_name">Home</span>
         </li>
-        <li className="drawer_list_item">
+        <li className="drawer_list_item" onClick={profileNavigater}>
           <Icon icon="carbon:user-avatar-filled" />
           <span className="drawer_list_item_name">Raju Lama</span>
         </li>
