@@ -2,7 +2,24 @@
     font-size: 2rem;
     font-family: $primary-font;
     color: $primary-color-dark;
+}
+
+img.logo {
+  height: 4rem;
+}
+
+.hamburger {
+  display: none;
+}
+
+.mob-hamburger {
+  @include breakpoint-down(small) {
+    display: flex;
   }
-  img.logo {
-    height: 4rem;
+}
+
+.mob-nav-link {
+  @include breakpoint-down(small) {
+    display: none;
   }
+}
