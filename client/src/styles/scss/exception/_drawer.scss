@@ -1,0 +1,35 @@
+.side_drawer {
+    width: 70%;
+    height: 100vh;
+    background: $light-color;
+    z-index: 200;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(+100%);
+    transition: all 1s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.side_drawer.show{
+    transform: translateX(0);
+}
+.drawer_list{
+    list-style: none;
+}
+.drawer_list_item{
+    padding: $one-font-size;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:hover {
+       background-color: $primary-color-dark; 
+    }
+}
+.drawer_list_item_name{
+    margin-left: 5px;
+}
