@@ -85,7 +85,8 @@ select {
 
 //scrollbar
 ::-webkit-scrollbar {
-  width: 0.5rem !important;
+  // width: 0.5rem !important;
+  display: none;
 }
 
 ::-webkit-scrollbar-track {

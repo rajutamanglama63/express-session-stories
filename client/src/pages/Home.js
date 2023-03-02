@@ -3,7 +3,7 @@ import Card from "../components/Card";
 
 const Home = () => {
   return (
-    <div className="wrapper">
+    <div className="wrapper region-sm">
       <Card />
       <Card />
       <Card />

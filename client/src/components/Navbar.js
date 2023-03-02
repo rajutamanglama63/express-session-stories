@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = ({ open, handleOpen, handleClose }) => {
   return (
-    <div className="shadow">
+    <div className="shadow nav">
       <div className="wrapper flex split-pair align-center">
         {!open ? (
           <>
