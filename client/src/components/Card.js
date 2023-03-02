@@ -1,14 +1,16 @@
-import React from "react";
+import { Icon } from "@iconify/react";
 
 const Card = () => {
   return (
     <div style={{ border: "1px dotted grey" }} className="region-margin-sm">
       <div className="flex block-view region-sm">
-        <h4 className="h6">Hawaijahaz</h4>
+        <div>
+          <p className="h4">Hawaijahaz</p>
+        </div>
         <p className="one-font-size">Sangita Mukarung</p>
       </div>
       <div className="region-tn">
-        <p className="paragraph">
+        <p className="paragraph paragraph-color">
           Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
           laying out print, graphic or web designs. The passage is attributed to
           an unknown typesetter in the 15th century who is thought to have
@@ -28,9 +30,15 @@ const Card = () => {
           authoritative history of lorem ipsum.
         </p>
       </div>
-      <div className="flex split-pair">
-        <button className="btn">Like</button>
-        <button className="btn">Comment</button>
+      <div className="flex ">
+        <div className="flex align-center">
+          <Icon icon="mdi:like" className="like-cmnt-btn" />
+          <span className="region-left-margin-tn no-font-weight">27</span>
+        </div>
+        <div className="flex align-center region-left-margin-md ">
+          <Icon icon="ic:round-mode-comment" className="like-cmnt-btn" />
+          <span className="region-left-margin-tn no-font-weight">44</span>
+        </div>
       </div>
     </div>
   );

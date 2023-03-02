@@ -46,16 +46,12 @@
     color: $primary-color;
   }
 
-  .member-btn {
-    border: none;
-      background-color: $primary-color;
-      color: $light-color;
-      padding: 0.5rem 1rem;
-      font-size: 1rem;
+  .like-cmnt-btn {
+      color: $primary-color-dark;
       cursor: pointer;
     
     &:hover {
-      background-color: $primary-color-dark;
+      color: $primary-color;
     }
   }
 

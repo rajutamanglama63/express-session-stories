@@ -36,6 +36,10 @@
   .paragraph {
     font-size: $paragraph;
   }
+
+  .paragraph-color {
+    color: $paragraph-color;
+  }
   
   .font-sm{
     @include breakpoint-down(small) {
