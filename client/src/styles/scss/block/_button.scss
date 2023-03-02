@@ -40,10 +40,20 @@
   
   .btn-del{
     color: $secondary_color;
+    cursor: pointer;
+
+    &:hover {
+      color: $secondary-color-light;
+    }
   }
   
   .btn-edit{
-    color: $primary-color;
+    color: $primary-color-dark;
+    cursor: pointer;
+
+    &:hover {
+      color: $primary-color;
+    }
   }
 
   .like-cmnt-btn {

@@ -2,12 +2,23 @@ import { Icon } from "@iconify/react";
 
 const Card = () => {
   return (
-    <div style={{ border: "1px dotted grey" }} className="region-margin-sm">
+    <div className="region-margin-sm">
       <div className="flex block-view region-sm">
-        <div>
-          <p className="h4">Hawaijahaz</p>
+        <p className="h4">Life on Mars do exist.</p>
+        <div className="flex align-center">
+          <p className="h6">Sangita Mukarung</p>
+          <Icon
+            icon="material-symbols:edit"
+            className="region-left-margin-tn btn-edit"
+          />
+          <Icon
+            icon="material-symbols:delete-forever"
+            className="region-left-margin-tn btn-del"
+          />
         </div>
-        <p className="one-font-size">Sangita Mukarung</p>
+        <p className="one-font-size">
+          Uploaded: <span>Feb 02, 2023</span>
+        </p>
       </div>
       <div className="region-tn">
         <p className="paragraph paragraph-color">
