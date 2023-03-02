@@ -2,7 +2,7 @@ import { Icon } from "@iconify/react";
 
 const Card = () => {
   return (
-    <div className="region-margin-sm">
+    <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
         <p className="h4">Life on Mars do exist.</p>
         <div className="flex align-center">
@@ -51,6 +51,7 @@ const Card = () => {
           <span className="region-left-margin-tn no-font-weight">44</span>
         </div>
       </div>
+      <div className="line region-margin-tn"></div>
     </div>
   );
 };

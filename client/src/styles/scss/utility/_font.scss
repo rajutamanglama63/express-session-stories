@@ -40,6 +40,10 @@
   .paragraph-color {
     color: $paragraph-color;
   }
+
+  .line {
+    border: 1px solid $line-color;
+  }
   
   .font-sm{
     @include breakpoint-down(small) {
