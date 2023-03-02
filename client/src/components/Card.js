@@ -21,7 +21,7 @@ const Card = () => {
         </p>
       </div>
       <div className="region-tn">
-        <p className="paragraph paragraph-color">
+        <p className="paragraph paragraph-color spec-text">
           Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
           laying out print, graphic or web designs. The passage is attributed to
           an unknown typesetter in the 15th century who is thought to have
