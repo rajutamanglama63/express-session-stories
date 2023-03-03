@@ -1,9 +1,16 @@
 import { Icon } from "@iconify/react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 
 const Card = () => {
   const navigate = useNavigate();
+
+  const [dispalyComment, setDisplayComment] = useState(false);
+
+  const commentDisplayHandler = () => {
+    setDisplayComment(!dispalyComment);
+  };
 
   const singlePageHandler = () => {
     navigate("/single/:id");
@@ -55,12 +62,20 @@ const Card = () => {
           <Icon icon="mdi:like" className="like-cmnt-btn" />
           <span className="region-left-margin-tn no-font-weight">27</span>
         </div>
-        <div className="flex align-center region-left-margin-md ">
+        <div
+          className="flex align-center region-left-margin-md "
+          onClick={commentDisplayHandler}
+        >
           <Icon icon="ic:round-mode-comment" className="like-cmnt-btn" />
           <span className="region-left-margin-tn no-font-weight">44</span>
         </div>
       </div>
-      <Comment />
+
+      {dispalyComment ? (
+        <>
+          <Comment />
+        </>
+      ) : null}
       <div className="line region-margin-tn"></div>
     </div>
   );
