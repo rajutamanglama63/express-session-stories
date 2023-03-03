@@ -1,18 +1,10 @@
 import { Icon } from "@iconify/react";
-import { useNavigate } from "react-router-dom";
 
-const Card = () => {
-  const navigate = useNavigate();
-
-  const singlePageHandler = () => {
-    navigate("/single/:id");
-  };
+const SingleCard = () => {
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
-        <p className="h4 pointer" onClick={singlePageHandler}>
-          Life on Mars do exist.
-        </p>
+        <p className="h4 pointer">Life on Mars do exist.</p>
         <div className="flex align-center">
           <p className="h6">Sangita Mukarung</p>
           <Icon
@@ -29,7 +21,7 @@ const Card = () => {
         </p>
       </div>
       <div className="region-tn">
-        <p className="paragraph paragraph-color spec-text">
+        <p className="paragraph paragraph-color ">
           Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
           laying out print, graphic or web designs. The passage is attributed to
           an unknown typesetter in the 15th century who is thought to have
@@ -64,4 +56,4 @@ const Card = () => {
   );
 };
 
-export default Card;
+export default SingleCard;
