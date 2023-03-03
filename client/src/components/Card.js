@@ -4,7 +4,7 @@ const Card = () => {
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
-        <p className="h4">Life on Mars do exist.</p>
+        <p className="h4 pointer">Life on Mars do exist.</p>
         <div className="flex align-center">
           <p className="h6">Sangita Mukarung</p>
           <Icon

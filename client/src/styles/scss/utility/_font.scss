@@ -51,3 +51,11 @@
     }
     
   }
+
+
+  .font-md {
+    @include breakpoint-down(small) {
+      font-size: $h4;
+      font-weight: $weight-lg;
+    }
+  }
