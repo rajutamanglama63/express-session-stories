@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { useNavigate } from "react-router-dom";
+import Comment from "./Comment";
 
 const Card = () => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ const Card = () => {
           <span className="region-left-margin-tn no-font-weight">44</span>
         </div>
       </div>
+      <Comment />
       <div className="line region-margin-tn"></div>
     </div>
   );
