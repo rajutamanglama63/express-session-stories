@@ -5,7 +5,7 @@ const Comment = () => {
     <div className="flex block-view region-tn">
       <p className="h6 bold">Please comment below</p>
       <form className="flex block-view">
-        <textarea placeholder="comment..." />
+        <textarea className="input-field" placeholder="comment..." />
         <button className="comment-btn region-margin-tn">Comment</button>
       </form>
       <div className="region-padding-top">
