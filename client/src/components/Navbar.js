@@ -1,8 +1,10 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = ({ open, handleOpen, handleClose }) => {
+  const navigate = useNavigate();
+
   return (
     <div className="shadow nav">
       <div className="wrapper flex split-pair align-center">
@@ -20,7 +22,9 @@ const Navbar = ({ open, handleOpen, handleClose }) => {
           </>
         )}
 
-        <div className="logo h2">Story</div>
+        <div className="logo h2 pointer" onClick={() => navigate("/")}>
+          Story
+        </div>
         <div className="flex split-pair align-center gap-2 mob-nav-link">
           <NavLink to="/" className="pointer text-link font-sm">
             Home
