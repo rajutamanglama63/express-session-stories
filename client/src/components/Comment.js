@@ -4,7 +4,10 @@ const Comment = () => {
   return (
     <div className="flex block-view region-tn">
       <p className="h6 bold">Please comment below</p>
-      <textarea placeholder="comment..." />
+      <form className="flex block-view">
+        <textarea placeholder="comment..." />
+        <button className="comment-btn region-margin-tn">Comment</button>
+      </form>
       <div className="region-padding-top">
         <p className="paragraph bold user-name-color">Harihar Pandey</p>
         <p className="one-font-size paragraph-color">

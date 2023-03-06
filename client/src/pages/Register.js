@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Register = () => {
   return (
-    <div className="wrapper flex block-view">
+    <div className="wrapper flex block-view region-sm">
       <div className="container-md container-tn">
         <div className="flex block-view region-sm">
           <h4 className="h6">Story Application</h4>
