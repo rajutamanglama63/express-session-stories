@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { registerUser } from "../reducers/userReducer";
 
 const Register = () => {
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({
     username: "",
     email: "",
@@ -10,7 +13,7 @@ const Register = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("UserData: ", userData);
+    dispatch(registerUser(userData));
   };
   return (
     <div className="wrapper flex block-view region-sm">
