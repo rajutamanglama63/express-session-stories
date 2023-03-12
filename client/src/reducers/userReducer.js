@@ -12,8 +12,6 @@ const userSlice = createSlice({
   reducers: {
     setUserRegister(state, action) {
       const responseData = action.payload;
-      console.log("actionType: ", action.type);
-      console.log("responseData: ", responseData);
 
       return responseData.success
         ? {
@@ -25,7 +23,20 @@ const userSlice = createSlice({
         : { ...state, msg: responseData.msg, loading: false, user: {} };
     },
 
-    setUserLogin(state, action) {},
+    setUserLogin(state, action) {
+      const responseData = action.payload;
+      console.log("actionType: ", action.type);
+      console.log("responseData: ", responseData);
+
+      return responseData.success
+        ? {
+            ...state,
+            msg: responseData.msg,
+            loading: false,
+            user: responseData.user,
+          }
+        : { ...state, msg: responseData.msg, loading: false, user: {} };
+    },
   },
 });
 
@@ -39,9 +50,9 @@ export const registerUser = (data) => {
   };
 };
 
-export const loginUser = (data) => {
+export const loginUser = (email, password) => {
   return async (dispatch) => {
-    const result = await services.login(data);
+    const result = await services.login({ email, password });
 
     dispatch(setUserLogin(result));
   };

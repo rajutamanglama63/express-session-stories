@@ -8,9 +8,19 @@ const register = async (userData) => {
 
     return response.data;
   } catch (error) {
+    return error.response.data;
+  }
+};
+
+const login = async (loginCredentials) => {
+  try {
+    const response = await axios.post(`${baseUrl}/signin`, loginCredentials);
+
+    return response.data;
+  } catch (error) {
     console.log("errorResponse: ", error);
     return error.response.data;
   }
 };
 
-export default { register };
+export default { register, login };

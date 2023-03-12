@@ -40,6 +40,7 @@ userRouter.post("/signup", async (req, res, next) => {
 });
 
 userRouter.post("/signin", async (req, res, next) => {
+  console.log("res: ", res.body);
   try {
     const { email, password } = req.body;
 
@@ -66,7 +67,7 @@ userRouter.post("/signin", async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: "Successfully logged in.",
-      user: user.username,
+      user: user,
     });
   } catch (error) {
     next(error);
