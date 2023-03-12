@@ -9,7 +9,7 @@ const register = async (userData) => {
     return response.data;
   } catch (error) {
     console.log("errorResponse: ", error);
-    return error.response.data.msg;
+    return error.response.data;
   }
 };
 

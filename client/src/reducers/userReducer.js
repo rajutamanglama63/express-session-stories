@@ -14,17 +14,36 @@ const userSlice = createSlice({
       const responseData = action.payload;
       console.log("actionType: ", action.type);
       console.log("responseData: ", responseData);
+
+      return responseData.success
+        ? {
+            ...state,
+            msg: responseData.msg,
+            loading: false,
+            user: responseData.newUser,
+          }
+        : { ...state, msg: responseData.msg, loading: false, user: {} };
     },
+
+    setUserLogin(state, action) {},
   },
 });
 
-export const { setUserRegister } = userSlice.actions;
+export const { setUserRegister, setUserLogin } = userSlice.actions;
 
 export const registerUser = (data) => {
   return async (dispatch) => {
     const result = await services.register(data);
 
     dispatch(setUserRegister(result));
+  };
+};
+
+export const loginUser = (data) => {
+  return async (dispatch) => {
+    const result = await services.login(data);
+
+    dispatch(setUserLogin(result));
   };
 };
 

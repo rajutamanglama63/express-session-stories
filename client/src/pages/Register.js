@@ -11,9 +11,18 @@ const Register = () => {
     password: "",
   });
 
+  const clear = () => {
+    setUserData({
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
+
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(registerUser(userData));
+    clear();
   };
   return (
     <div className="wrapper flex block-view region-sm">
