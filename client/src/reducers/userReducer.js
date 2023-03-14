@@ -6,7 +6,7 @@ const userSlice = createSlice({
   name: "user",
   initialState: {
     msg: "",
-    loading: true,
+
     user: {},
   },
   reducers: {
@@ -17,10 +17,10 @@ const userSlice = createSlice({
         ? {
             ...state,
             msg: responseData.msg,
-            loading: false,
+
             user: responseData.newUser,
           }
-        : { ...state, msg: responseData.msg, loading: false, user: {} };
+        : { ...state, msg: responseData.msg, user: {} };
     },
 
     userLogin(state, action) {
@@ -30,18 +30,18 @@ const userSlice = createSlice({
         ? {
             ...state,
             msg: responseData.msg,
-            loading: false,
+
             user: responseData.user,
           }
-        : { ...state, msg: responseData.msg, loading: false, user: {} };
+        : { ...state, msg: responseData.msg, user: {} };
     },
 
     userLogout(state, action) {
       const responseData = action.payload;
 
       return responseData.success
-        ? { ...state, msg: responseData.msg, loading: false, user: {} }
-        : { ...state, msg: responseData.msg, loading: false, user: {} };
+        ? { ...state, msg: responseData.msg, user: {} }
+        : { ...state, msg: responseData.msg, user: {} };
     },
   },
 });
