@@ -27,8 +27,6 @@ storyRouter.post(
 
       const user = await User.findOne({ username: req.session.username });
 
-      console.log("userStories: ", user);
-
       user.stories.unshift(newStory.id);
 
       await user.save();

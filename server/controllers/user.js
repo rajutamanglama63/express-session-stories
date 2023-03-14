@@ -31,7 +31,9 @@ userRouter.post("/signup", async (req, res, next) => {
 
     newUser.save();
 
-    res.status(201).json(newUser);
+    res
+      .status(201)
+      .json({ success: true, msg: "User successfully registered.", newUser });
   } catch (error) {
     next(error);
   }
@@ -64,7 +66,7 @@ userRouter.post("/signin", async (req, res, next) => {
     res.status(200).json({
       success: true,
       msg: "Successfully logged in.",
-      user: user.username,
+      user: user,
     });
   } catch (error) {
     next(error);
@@ -75,8 +77,6 @@ userRouter.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).populate("stories");
 
-    console.log("logged user: ", user);
-
     res.status(200).json({ success: true, user: user });
   } catch (error) {
     next(error);
@@ -86,9 +86,11 @@ userRouter.get("/:id", async (req, res, next) => {
 userRouter.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ msg: err.message });
+      return res.status(500).json({ success: false, msg: err.message });
     } else {
-      return res.status(200).json({ msg: "Logout successfully." });
+      return res
+        .status(200)
+        .json({ success: true, msg: "Logout successfully." });
     }
   });
 });

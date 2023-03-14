@@ -1,9 +1,16 @@
 import React from "react";
 import { Icon } from "@iconify/react";
 import { NavLink, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../reducers/userReducer";
 
 const Navbar = ({ open, handleOpen, handleClose }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const logoutHandler = () => {
+    dispatch(logoutUser());
+  };
 
   return (
     <div className="shadow nav">
@@ -32,7 +39,9 @@ const Navbar = ({ open, handleOpen, handleClose }) => {
           <NavLink to="/profile/:id" className="pointer text-link font-sm">
             Raju Lama
           </NavLink>
-          <button className="learn-btn">Logout</button>
+          <button className="learn-btn" onClick={logoutHandler}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
