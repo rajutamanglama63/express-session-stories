@@ -47,7 +47,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { userRegister, userLogin } = userSlice.actions;
+export const { userRegister, userLogin, userLogout } = userSlice.actions;
 
 export const registerUser = (data) => {
   return async (dispatch) => {
@@ -69,7 +69,7 @@ export const logoutUser = () => {
   return async (dispatch) => {
     const result = await services.logout();
 
-    dispatch();
+    dispatch(userLogout(result));
   };
 };
 
