@@ -38,7 +38,6 @@ const userSlice = createSlice({
 
     userLogout(state, action) {
       const responseData = action.payload;
-      console.log("responseData: ", responseData);
 
       return responseData.success
         ? { ...state, msg: responseData.msg, loading: false, user: {} }

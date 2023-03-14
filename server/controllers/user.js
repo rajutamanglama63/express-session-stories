@@ -40,7 +40,6 @@ userRouter.post("/signup", async (req, res, next) => {
 });
 
 userRouter.post("/signin", async (req, res, next) => {
-  console.log("res: ", res.body);
   try {
     const { email, password } = req.body;
 
@@ -77,8 +76,6 @@ userRouter.post("/signin", async (req, res, next) => {
 userRouter.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findById(req.params.id).populate("stories");
-
-    console.log("logged user: ", user);
 
     res.status(200).json({ success: true, user: user });
   } catch (error) {
