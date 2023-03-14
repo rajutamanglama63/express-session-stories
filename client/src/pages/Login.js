@@ -1,14 +1,22 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { loginUser } from "../reducers/userReducer";
 
 const Login = () => {
   const dispatch = useDispatch();
+
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+
+  const clear = () => {
+    setCredentials({
+      email: "",
+      password: "",
+    });
+  };
 
   const handleInput = (e) => {
     const { name, value } = e.target;
@@ -18,6 +26,7 @@ const Login = () => {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(loginUser(credentials.email, credentials.password));
+    clear();
   };
   return (
     <div className="wrapper flex block-view region-sm">

@@ -18,9 +18,19 @@ const login = async (loginCredentials) => {
 
     return response.data;
   } catch (error) {
+    return error.response.data;
+  }
+};
+
+const logout = async () => {
+  try {
+    const response = await axios.post(`${baseUrl}/logout`);
+
+    return response.data;
+  } catch (error) {
     console.log("errorResponse: ", error);
     return error.response.data;
   }
 };
 
-export default { register, login };
+export default { register, login, logout };

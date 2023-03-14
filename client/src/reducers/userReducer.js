@@ -10,7 +10,7 @@ const userSlice = createSlice({
     user: {},
   },
   reducers: {
-    setUserRegister(state, action) {
+    userRegister(state, action) {
       const responseData = action.payload;
 
       return responseData.success
@@ -23,10 +23,8 @@ const userSlice = createSlice({
         : { ...state, msg: responseData.msg, loading: false, user: {} };
     },
 
-    setUserLogin(state, action) {
+    userLogin(state, action) {
       const responseData = action.payload;
-      console.log("actionType: ", action.type);
-      console.log("responseData: ", responseData);
 
       return responseData.success
         ? {
@@ -37,16 +35,25 @@ const userSlice = createSlice({
           }
         : { ...state, msg: responseData.msg, loading: false, user: {} };
     },
+
+    userLogout(state, action) {
+      const responseData = action.payload;
+      console.log("responseData: ", responseData);
+
+      return responseData.success
+        ? { ...state, msg: responseData.msg, loading: false, user: {} }
+        : { ...state, msg: responseData.msg, loading: false, user: {} };
+    },
   },
 });
 
-export const { setUserRegister, setUserLogin } = userSlice.actions;
+export const { userRegister, userLogin } = userSlice.actions;
 
 export const registerUser = (data) => {
   return async (dispatch) => {
     const result = await services.register(data);
 
-    dispatch(setUserRegister(result));
+    dispatch(userRegister(result));
   };
 };
 
@@ -54,7 +61,15 @@ export const loginUser = (email, password) => {
   return async (dispatch) => {
     const result = await services.login({ email, password });
 
-    dispatch(setUserLogin(result));
+    dispatch(userLogin(result));
+  };
+};
+
+export const logoutUser = () => {
+  return async (dispatch) => {
+    const result = await services.logout();
+
+    dispatch();
   };
 };
 

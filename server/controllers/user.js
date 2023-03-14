@@ -89,9 +89,11 @@ userRouter.get("/:id", async (req, res, next) => {
 userRouter.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {
-      return res.status(500).json({ msg: err.message });
+      return res.status(500).json({ success: false, msg: err.message });
     } else {
-      return res.status(200).json({ msg: "Logout successfully." });
+      return res
+        .status(200)
+        .json({ success: true, msg: "Logout successfully." });
     }
   });
 });
