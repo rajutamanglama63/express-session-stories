@@ -42,6 +42,9 @@ const Navbar = ({ open, handleOpen, handleClose }) => {
               <NavLink to="/profile/:id" className="pointer text-link font-sm">
                 {userAuth.user.username}
               </NavLink>
+              <NavLink to="/create" className="pointer text-link font-sm">
+                Create
+              </NavLink>
               <button className="learn-btn" onClick={logoutHandler}>
                 Logout
               </button>

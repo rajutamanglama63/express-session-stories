@@ -19,6 +19,11 @@ const Drawer = ({ open, handleClose }) => {
     handleClose();
   };
 
+  const createNavigator = () => {
+    navigate("/create");
+    handleClose();
+  };
+
   return (
     <div className={sideDrawerClass.join(" ")}>
       <ul className="drawer_list">
@@ -29,6 +34,10 @@ const Drawer = ({ open, handleClose }) => {
         <li className="drawer_list_item" onClick={profileNavigater}>
           <Icon icon="carbon:user-avatar-filled" />
           <span className="drawer_list_item_name">Raju Lama</span>
+        </li>
+        <li className="drawer_list_item" onClick={createNavigator}>
+          <Icon icon="material-symbols:add-circle" />
+          <span className="drawer_list_item_name">Create</span>
         </li>
         <li className="drawer_list_item">
           <Icon icon="ri:logout-circle-r-fill" />
