@@ -18,12 +18,6 @@ function App() {
     setOpen(false);
   };
 
-  // const handleNavbar = () => {
-  //   if(userAuth.user.username) {
-  //     setIsAuth(true)
-  //   }
-  // }
-
   useEffect(() => {
     if (userAuth.user.username) {
       setIsAuth(true);
