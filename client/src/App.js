@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Backdrop from "./components/Backdrop";
 import Drawer from "./components/Drawer";
 import Navbar from "./components/Navbar";
 import Router from "./Router";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
+  const userAuth = useSelector((state) => state.auth);
+  const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -15,6 +17,18 @@ function App() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  // const handleNavbar = () => {
+  //   if(userAuth.user.username) {
+  //     setIsAuth(true)
+  //   }
+  // }
+
+  useEffect(() => {
+    if (userAuth.user.username) {
+      setIsAuth(true);
+    }
+  }, [userAuth.user.username]);
   return (
     <div>
       {isAuth ? (
