@@ -1,23 +1,18 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Card from "../components/Card";
 
 const Home = () => {
+  const stories = useSelector((state) => state.story);
   return (
     <div className="wrapper region-sm">
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      {stories.length !== 0 ? (
+        stories.map((story) => <Card key={story.id} story={story} />)
+      ) : (
+        <>
+          <h2>No stories.</h2>
+        </>
+      )}
     </div>
   );
 };

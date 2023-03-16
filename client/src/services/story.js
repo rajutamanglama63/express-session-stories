@@ -12,4 +12,14 @@ const createStory = async (story) => {
   }
 };
 
-export default { createStory };
+const getStories = async () => {
+  try {
+    const response = await axios.get(baseUrl);
+    return response.data;
+  } catch (error) {
+    console.log("err from server: ", error);
+    return error.response.data;
+  }
+};
+
+export default { createStory, getStories };

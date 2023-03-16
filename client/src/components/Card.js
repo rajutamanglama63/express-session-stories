@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Comment from "./Comment";
 
-const Card = () => {
+const Card = ({ story }) => {
   const navigate = useNavigate();
 
   const [dispalyComment, setDisplayComment] = useState(false);
@@ -15,14 +15,15 @@ const Card = () => {
   const singlePageHandler = () => {
     navigate("/single/:id");
   };
+
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
         <p className="h4 pointer" onClick={singlePageHandler}>
-          Life on Mars do exist.
+          {story?.title}
         </p>
         <div className="flex align-center">
-          <p className="h6">Sangita Mukarung</p>
+          <p className="h6">{story?.storyTeller}</p>
           <Icon
             icon="material-symbols:edit"
             className="region-left-margin-tn btn-edit"
@@ -33,29 +34,11 @@ const Card = () => {
           />
         </div>
         <p className="one-font-size">
-          Uploaded: <span>Feb 02, 2023</span>
+          Uploaded: <span>{story?.date}</span>
         </p>
       </div>
       <div className="region-tn">
-        <p className="paragraph paragraph-color spec-text">
-          Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
-          laying out print, graphic or web designs. The passage is attributed to
-          an unknown typesetter in the 15th century who is thought to have
-          scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a
-          type specimen book. It usually begins with: “Lorem ipsum dolor sit
-          amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-          labore et dolore magna aliqua.” The purpose of lorem ipsum is to
-          create a natural looking block of text (sentence, paragraph, page,
-          etc.) that doesn't distract from the layout. A practice not without
-          controversy, laying out pages with meaningless filler text can be very
-          useful when the focus is meant to be on design, not content. The
-          passage experienced a surge in popularity during the 1960s when
-          Letraset used it on their dry-transfer sheets, and again during the
-          90s as desktop publishers bundled the text with their software. Today
-          it's seen all around the web; on templates, websites, and stock
-          designs. Use our generator to get your own, or read on for the
-          authoritative history of lorem ipsum.
-        </p>
+        <p className="paragraph paragraph-color spec-text">{story?.content}</p>
       </div>
       <div className="flex ">
         <div className="flex align-center">
