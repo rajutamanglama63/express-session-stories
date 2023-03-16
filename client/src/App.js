@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Backdrop from "./components/Backdrop";
 import Drawer from "./components/Drawer";
 import Navbar from "./components/Navbar";
+import { allStories } from "./reducers/storyReducer";
 import Router from "./Router";
 
 function App() {
+  const dispatch = useDispatch();
   const userAuth = useSelector((state) => state.auth);
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
@@ -24,7 +26,9 @@ function App() {
     } else {
       setIsAuth(false);
     }
-  }, [userAuth.user.username]);
+
+    dispatch(allStories());
+  }, [userAuth.user.username, dispatch]);
   return (
     <div>
       {isAuth ? (
