@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { storyCreation } from "../reducers/storyReducer";
 
 const Create = () => {
+  const dispatch = useDispatch();
   const [story, setStory] = useState({
     title: "",
     content: "",
@@ -20,7 +23,7 @@ const Create = () => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("myStory: ", story);
+    dispatch(storyCreation(story));
     clear();
   };
   return (
