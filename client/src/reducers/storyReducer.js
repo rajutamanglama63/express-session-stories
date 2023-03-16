@@ -20,7 +20,6 @@ export const storyCreation = (story) => {
   return async (dispatch) => {
     const result = await services.createStory(story);
 
-    console.log("result: ", result);
     dispatch(setStory(result));
   };
 };
