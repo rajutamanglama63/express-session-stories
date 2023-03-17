@@ -14,7 +14,6 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const user = utilityFunc.getUser();
-  console.log("user: ", user);
 
   const handleOpen = () => {
     setOpen(true);
