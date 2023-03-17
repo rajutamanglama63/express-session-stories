@@ -6,7 +6,6 @@ import Drawer from "./components/Drawer";
 import Navbar from "./components/Navbar";
 import { allStories } from "./reducers/storyReducer";
 import Router from "./Router";
-import { Cookies } from "react-cookie";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,8 +13,8 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
 
-  const cookie = utilityFunc.getCookie();
-  console.log("cookie: ", cookies.get("connect.sid"));
+  const user = utilityFunc.getUser();
+  console.log("user: ", user);
 
   const handleOpen = () => {
     setOpen(true);
@@ -26,14 +25,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (userAuth.user.username) {
+    if (user !== null) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
 
     dispatch(allStories());
-  }, [userAuth.user.username, dispatch]);
+  }, [user, dispatch]);
   return (
     <div>
       {isAuth ? (
