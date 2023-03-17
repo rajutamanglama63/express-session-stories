@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import utilityFunc from "./utils/func";
 import Backdrop from "./components/Backdrop";
 import Drawer from "./components/Drawer";
 import Navbar from "./components/Navbar";
@@ -12,6 +13,8 @@ function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const user = utilityFunc.getUser();
+
   const handleOpen = () => {
     setOpen(true);
   };
@@ -21,14 +24,14 @@ function App() {
   };
 
   useEffect(() => {
-    if (userAuth.user.username) {
+    if (user !== null) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
 
     dispatch(allStories());
-  }, [userAuth.user.username, dispatch]);
+  }, [user, dispatch]);
   return (
     <div>
       {isAuth ? (

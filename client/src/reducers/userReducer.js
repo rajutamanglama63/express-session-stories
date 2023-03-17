@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import utilityFunc from "../utils/func";
 
 import services from "../services/user";
 
@@ -25,6 +26,7 @@ const userSlice = createSlice({
 
     userLogin(state, action) {
       const responseData = action.payload;
+      utilityFunc.loggedIn(responseData.user.username);
 
       return responseData.success
         ? {

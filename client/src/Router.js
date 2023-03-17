@@ -7,18 +7,20 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Single from "./pages/Single";
+import utilityFunc from "./utils/func";
 
 const Router = () => {
   const userAuth = useSelector((state) => state.auth);
+  const user = utilityFunc.getUser();
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    if (userAuth.user.username) {
+    if (user !== null) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
-  }, [userAuth.user.username]);
+  }, [user]);
   return (
     <Routes>
       <Route path="/">
