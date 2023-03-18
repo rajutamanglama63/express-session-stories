@@ -13,7 +13,7 @@ const Card = ({ story }) => {
   };
 
   const singlePageHandler = () => {
-    navigate("/single/:id");
+    navigate(`/single/${story.id}`);
   };
 
   return (
