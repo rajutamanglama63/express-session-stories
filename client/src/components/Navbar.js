@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Icon } from "@iconify/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -6,20 +6,19 @@ import utilityFunc from "../utils/func";
 import { logoutUser } from "../reducers/userReducer";
 
 const Navbar = ({ open, handleOpen, handleClose }) => {
-  const [reload, setReload] = useState(false);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // const userId = utilityFunc.getLoggedUserId();
+  const userId = utilityFunc.getLoggedUserId();
 
   const user = utilityFunc.getUser();
 
-  // const profilePath = `/profile/${userId}`;
+  const profilePath = `/profile/${userId}`;
 
   const logoutHandler = () => {
     dispatch(logoutUser());
     utilityFunc.loggedOut();
+    utilityFunc.removeLoggedUserId();
     utilityFunc.reload();
   };
 
@@ -49,7 +48,7 @@ const Navbar = ({ open, handleOpen, handleClose }) => {
               <NavLink to="/" className="pointer text-link font-sm">
                 Home
               </NavLink>
-              <NavLink to="/profile/:id" className="pointer text-link font-sm">
+              <NavLink to={profilePath} className="pointer text-link font-sm">
                 {user}
               </NavLink>
               <NavLink to="/create" className="pointer text-link font-sm">

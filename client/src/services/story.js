@@ -17,7 +17,6 @@ const getStories = async () => {
     const response = await axios.get(baseUrl);
     return response.data;
   } catch (error) {
-    console.log("err from server: ", error);
     return error.response.data;
   }
 };
