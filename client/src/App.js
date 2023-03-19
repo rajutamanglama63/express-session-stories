@@ -19,10 +19,9 @@ function App() {
     if (userAuth.user.id) {
       setReload(true);
     }
-  });
+  }, [setReload]);
 
   const user = utilityFunc.getUser();
-  console.log("user: ", user);
 
   const handleOpen = () => {
     setOpen(true);

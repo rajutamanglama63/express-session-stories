@@ -19,7 +19,7 @@ const Router = () => {
     if (userAuth.user.id) {
       setReload(true);
     }
-  });
+  }, [userAuth.user.id]);
 
   useEffect(() => {
     if (user !== null) {

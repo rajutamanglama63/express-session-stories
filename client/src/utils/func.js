@@ -11,6 +11,10 @@ const getLoggedUserId = () => {
   return id;
 };
 
+const removeLoggedUserId = () => {
+  localStorage.removeItem("id");
+};
+
 const getUser = () => {
   let user = localStorage.getItem("user");
   return user;
@@ -31,4 +35,5 @@ export default {
   loggedUserId,
   getLoggedUserId,
   reload,
+  removeLoggedUserId,
 };

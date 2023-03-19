@@ -9,7 +9,7 @@ const allUserSlice = createSlice({
     setUsers(state, action) {
       const responseData = action.payload;
 
-      return responseData.success ? responseData : state;
+      return responseData;
     },
   },
 });
@@ -19,7 +19,6 @@ export const { setUsers } = allUserSlice.actions;
 export const getAllUser = () => {
   return async (dispatch) => {
     const result = await services.allUser();
-    console.log("result: ", result);
 
     dispatch(setUsers(result));
   };
