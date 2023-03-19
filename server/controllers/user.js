@@ -83,6 +83,16 @@ userRouter.get("/:id", async (req, res, next) => {
   }
 });
 
+userRouter.get("/", async (req, res, next) => {
+  try {
+    const users = await User.find().populate("stories");
+
+    res.status(200).json({ success: true, users: users });
+  } catch (error) {
+    next(error);
+  }
+});
+
 userRouter.post("/logout", (req, res) => {
   req.session.destroy((err) => {
     if (err) {

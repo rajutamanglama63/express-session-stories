@@ -22,6 +22,26 @@ const login = async (loginCredentials) => {
   }
 };
 
+const profile = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/${id}`);
+
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+const allUser = async () => {
+  try {
+    const response = await axios.get(baseUrl);
+
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 const logout = async () => {
   try {
     const response = await axios.post(`${baseUrl}/logout`);
@@ -32,4 +52,4 @@ const logout = async () => {
   }
 };
 
-export default { register, login, logout };
+export default { register, login, profile, logout, allUser };

@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 import Card from "../components/Card";
 
 const Profile = () => {
+  const { userId } = useParams();
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   dispatch(profileReducer(userId));
+  // }, [userId, dispatch]);
   return (
     <div className="wrapper region-md">
       <div className="flex block-view">

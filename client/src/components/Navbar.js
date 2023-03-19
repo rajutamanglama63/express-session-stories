@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "@iconify/react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import utilityFunc from "../utils/func";
 import { logoutUser } from "../reducers/userReducer";
 
 const Navbar = ({ open, handleOpen, handleClose }) => {
+  const [reload, setReload] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const userAuth = useSelector((state) => state.auth);
+
+  // const userId = utilityFunc.getLoggedUserId();
 
   const user = utilityFunc.getUser();
+
+  // const profilePath = `/profile/${userId}`;
 
   const logoutHandler = () => {
     dispatch(logoutUser());
     utilityFunc.loggedOut();
+    utilityFunc.reload();
   };
 
   return (

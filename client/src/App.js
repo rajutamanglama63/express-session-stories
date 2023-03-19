@@ -6,14 +6,23 @@ import Drawer from "./components/Drawer";
 import Navbar from "./components/Navbar";
 import { allStories } from "./reducers/storyReducer";
 import Router from "./Router";
+import { getAllUser } from "./reducers/allUserReducer";
 
 function App() {
   const dispatch = useDispatch();
-  const userAuth = useSelector((state) => state.auth);
+  const [reload, setReload] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
 
+  const userAuth = useSelector((state) => state.auth);
+  useEffect(() => {
+    if (userAuth.user.id) {
+      setReload(true);
+    }
+  });
+
   const user = utilityFunc.getUser();
+  console.log("user: ", user);
 
   const handleOpen = () => {
     setOpen(true);
@@ -31,7 +40,8 @@ function App() {
     }
 
     dispatch(allStories());
-  }, [user, dispatch]);
+    dispatch(getAllUser());
+  }, [dispatch, user]);
   return (
     <div>
       {isAuth ? (

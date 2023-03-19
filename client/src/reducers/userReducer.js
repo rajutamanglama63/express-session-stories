@@ -27,6 +27,7 @@ const userSlice = createSlice({
     userLogin(state, action) {
       const responseData = action.payload;
       utilityFunc.loggedIn(responseData.user.username);
+      utilityFunc.loggedUserId(responseData.user.id);
 
       return responseData.success
         ? {

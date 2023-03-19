@@ -13,6 +13,13 @@ const Router = () => {
   const userAuth = useSelector((state) => state.auth);
   const user = utilityFunc.getUser();
   const [isAuth, setIsAuth] = useState(false);
+  const [reload, setReload] = useState(false);
+
+  useEffect(() => {
+    if (userAuth.user.id) {
+      setReload(true);
+    }
+  });
 
   useEffect(() => {
     if (user !== null) {
