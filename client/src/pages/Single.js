@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import SingleCard from "../components/SingleCard";
 
-const Single = () => {
+const Single = ({ setCurrentId }) => {
   const { id } = useParams();
   const stories = useSelector((state) => state.story);
 
@@ -13,7 +13,7 @@ const Single = () => {
       : null;
   return (
     <div className="wrapper region-md">
-      <SingleCard story={story} />
+      <SingleCard story={story} setCurrentId={setCurrentId} />
     </div>
   );
 };

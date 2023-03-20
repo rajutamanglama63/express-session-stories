@@ -15,6 +15,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const userAuth = useSelector((state) => state.auth);
+
   useEffect(() => {
     if (userAuth.user.id) {
       setReload(true);

@@ -1,7 +1,9 @@
 import { Icon } from "@iconify/react";
+import { useNavigate } from "react-router-dom";
 import utilityFunc from "../utils/func";
 
-const SingleCard = ({ story }) => {
+const SingleCard = ({ story, setCurrentId }) => {
+  const navigate = useNavigate();
   const user = utilityFunc.getUser();
   let storyToRender = story;
   if (storyToRender === null) {
@@ -10,8 +12,14 @@ const SingleCard = ({ story }) => {
       content: "Dummy content",
       storyTeller: "Katha bachak",
       date: "Feb 14 mon",
+      id: "123",
     };
   }
+
+  const editHandler = (storyId) => {
+    setCurrentId(storyId);
+    navigate("/create");
+  };
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
@@ -21,6 +29,7 @@ const SingleCard = ({ story }) => {
           {(user !== null) & (user === storyToRender.storyTeller) ? (
             <>
               <Icon
+                onClick={() => editHandler(storyToRender.id)}
                 icon="material-symbols:edit"
                 className="region-left-margin-tn btn-edit"
               />
