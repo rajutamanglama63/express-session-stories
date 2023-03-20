@@ -21,4 +21,14 @@ const getStories = async () => {
   }
 };
 
-export default { createStory, getStories };
+const updateStory = async (id, updatedData) => {
+  try {
+    const response = await axios.put(`${baseUrl}/${id}`, updatedData);
+
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export default { createStory, getStories, updateStory };
