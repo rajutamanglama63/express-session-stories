@@ -1,10 +1,11 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
 import Comment from "./Comment";
 import utilityFunc from "../utils/func";
 
-const Card = ({ story }) => {
+const Card = ({ story, setCurrentId }) => {
   const navigate = useNavigate();
   const user = utilityFunc.getUser();
 
@@ -18,6 +19,11 @@ const Card = ({ story }) => {
     navigate(`/single/${story.id}`);
   };
 
+  const editHandler = (storyId) => {
+    setCurrentId(storyId);
+    navigate("/create");
+  };
+
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
@@ -29,6 +35,7 @@ const Card = ({ story }) => {
           {user !== null && user === story.storyTeller ? (
             <>
               <Icon
+                onClick={() => editHandler(story.id)}
                 icon="material-symbols:edit"
                 className="region-left-margin-tn btn-edit"
               />

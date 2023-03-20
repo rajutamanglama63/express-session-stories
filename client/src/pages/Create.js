@@ -1,9 +1,15 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { storyUpdate } from "../reducers/storyControlReducer";
 import { storyCreation } from "../reducers/storyReducer";
 
-const Create = () => {
+const Create = ({ currentId, setCurrentId }) => {
   const dispatch = useDispatch();
+  const foundStory = useSelector((state) =>
+    currentId
+      ? state.story.find((eachStory) => eachStory.id === currentId)
+      : null
+  );
   const [story, setStory] = useState({
     title: "",
     content: "",
@@ -21,10 +27,22 @@ const Create = () => {
     });
   };
 
+  useEffect(() => {
+    if (foundStory) {
+      setStory(foundStory);
+    }
+  }, [foundStory]);
+
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(storyCreation(story));
-    clear();
+
+    if (currentId === null) {
+      dispatch(storyCreation(story));
+      clear();
+    } else {
+      dispatch(storyUpdate(currentId, story));
+      clear();
+    }
   };
   return (
     <div className="wrapper flex block-view region-md">

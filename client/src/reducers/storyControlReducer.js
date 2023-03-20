@@ -11,7 +11,9 @@ const storyControlSlice = createSlice({
     editStory(state, action) {
       const responseData = action.payload;
 
-      return responseData.success ? { ...state, msg: responseData.msg } : state;
+      return responseData.success
+        ? { ...state, msg: responseData.msg }
+        : { ...state, msg: responseData.msg };
     },
   },
 });

@@ -34,10 +34,16 @@ const Router = () => {
       <Route path="/">
         <Route
           index
-          element={isAuth ? <Home currentId={currentId} /> : <Login />}
+          element={isAuth ? <Home setCurrentId={setCurrentId} /> : <Login />}
         />
-        <Route path="/profile/:id" element={isAuth ? <Profile /> : <Login />} />
-        <Route path="/single/:id" element={isAuth ? <Single /> : <Login />} />
+        <Route
+          path="/profile/:id"
+          element={isAuth ? <Profile setCurrentId={setCurrentId} /> : <Login />}
+        />
+        <Route
+          path="/single/:id"
+          element={isAuth ? <Single setCurrentId={setCurrentId} /> : <Login />}
+        />
         <Route
           path="/create"
           element={

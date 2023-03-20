@@ -23,7 +23,7 @@ const getStories = async () => {
 
 const updateStory = async (id, updatedData) => {
   try {
-    const response = await axios.put(`${baseUrl}/${id}`, updatedData);
+    const response = await axios.put(`${baseUrl}/update/${id}`, updatedData);
 
     return response.data;
   } catch (error) {
