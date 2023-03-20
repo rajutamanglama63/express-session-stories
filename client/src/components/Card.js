@@ -2,9 +2,11 @@ import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Comment from "./Comment";
+import utilityFunc from "../utils/func";
 
 const Card = ({ story }) => {
   const navigate = useNavigate();
+  const user = utilityFunc.getUser();
 
   const [dispalyComment, setDisplayComment] = useState(false);
 
@@ -24,14 +26,18 @@ const Card = ({ story }) => {
         </p>
         <div className="flex align-center">
           <p className="h6">{story?.storyTeller}</p>
-          <Icon
-            icon="material-symbols:edit"
-            className="region-left-margin-tn btn-edit"
-          />
-          <Icon
-            icon="material-symbols:delete-forever"
-            className="region-left-margin-tn btn-del"
-          />
+          {user !== null && user === story.storyTeller ? (
+            <>
+              <Icon
+                icon="material-symbols:edit"
+                className="region-left-margin-tn btn-edit"
+              />
+              <Icon
+                icon="material-symbols:delete-forever"
+                className="region-left-margin-tn btn-del"
+              />
+            </>
+          ) : null}
         </div>
         <p className="one-font-size">
           Uploaded: <span>{story?.date}</span>
