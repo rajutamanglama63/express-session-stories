@@ -1,6 +1,8 @@
 import { Icon } from "@iconify/react";
+import utilityFunc from "../utils/func";
 
 const SingleCard = ({ story }) => {
+  const user = utilityFunc.getUser();
   let storyToRender = story;
   if (storyToRender === null) {
     storyToRender = {
@@ -16,14 +18,18 @@ const SingleCard = ({ story }) => {
         <p className="h4 pointer">{storyToRender.title}</p>
         <div className="flex align-center">
           <p className="h6">{storyToRender.storyTeller}</p>
-          <Icon
-            icon="material-symbols:edit"
-            className="region-left-margin-tn btn-edit"
-          />
-          <Icon
-            icon="material-symbols:delete-forever"
-            className="region-left-margin-tn btn-del"
-          />
+          {(user !== null) & (user === storyToRender.storyTeller) ? (
+            <>
+              <Icon
+                icon="material-symbols:edit"
+                className="region-left-margin-tn btn-edit"
+              />
+              <Icon
+                icon="material-symbols:delete-forever"
+                className="region-left-margin-tn btn-del"
+              />
+            </>
+          ) : null}
         </div>
         <p className="one-font-size">
           Uploaded: <span>{storyToRender.date}</span>
