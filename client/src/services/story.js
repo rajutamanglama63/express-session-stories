@@ -31,4 +31,14 @@ const updateStory = async (id, updatedData) => {
   }
 };
 
-export default { createStory, getStories, updateStory };
+const deleteStory = async (id) => {
+  try {
+    const response = await axios.delete(`${baseUrl}/delete/${id}`);
+
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
+export default { createStory, getStories, updateStory, deleteStory };
