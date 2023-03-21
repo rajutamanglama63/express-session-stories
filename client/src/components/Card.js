@@ -1,11 +1,14 @@
 import { Icon } from "@iconify/react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import Comment from "./Comment";
 import utilityFunc from "../utils/func";
+import { storyDelete } from "../reducers/storyControlReducer";
 
 const Card = ({ story, setCurrentId }) => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = utilityFunc.getUser();
 
@@ -24,6 +27,10 @@ const Card = ({ story, setCurrentId }) => {
     navigate("/create");
   };
 
+  const deleteHandler = (id) => {
+    dispatch(storyDelete(id));
+  };
+
   return (
     <div className="region-margin-sm ">
       <div className="flex block-view region-sm">
@@ -40,6 +47,7 @@ const Card = ({ story, setCurrentId }) => {
                 className="region-left-margin-tn btn-edit"
               />
               <Icon
+                onClick={() => deleteHandler(story.id)}
                 icon="material-symbols:delete-forever"
                 className="region-left-margin-tn btn-del"
               />
