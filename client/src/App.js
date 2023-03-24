@@ -15,6 +15,7 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const userAuth = useSelector((state) => state.auth);
+  const storyControl = useSelector((state) => state.storyControl);
 
   useEffect(() => {
     if (userAuth.user.id) {
@@ -33,7 +34,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (user !== null) {
+    if (user !== null || storyControl.msg !== "") {
       setIsAuth(true);
     } else {
       setIsAuth(false);
@@ -41,7 +42,7 @@ function App() {
 
     dispatch(allStories());
     dispatch(getAllUser());
-  }, [dispatch, user]);
+  }, [dispatch, user, storyControl.msg]);
   return (
     <div>
       {isAuth ? (

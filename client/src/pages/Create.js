@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { storyUpdate } from "../reducers/storyControlReducer";
 import { storyCreation } from "../reducers/storyReducer";
 
 const Create = ({ currentId, setCurrentId }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const foundStory = useSelector((state) =>
     currentId
@@ -39,9 +41,11 @@ const Create = ({ currentId, setCurrentId }) => {
     if (currentId === null) {
       dispatch(storyCreation(story));
       clear();
+      navigate("/");
     } else {
       dispatch(storyUpdate(currentId, story));
       clear();
+      navigate("/");
     }
   };
   return (
