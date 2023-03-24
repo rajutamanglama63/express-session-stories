@@ -9,7 +9,7 @@ const storySlice = createSlice({
     appendStory(state, action) {
       const responseData = action.payload;
 
-      return responseData.success ? [...state, responseData] : null;
+      return responseData.success ? [...state, responseData.story] : null;
     },
 
     setStory(state, action) {
