@@ -7,12 +7,14 @@ import Navbar from "./components/Navbar";
 import { allStories } from "./reducers/storyReducer";
 import Router from "./Router";
 import { getAllUser } from "./reducers/allUserReducer";
+import Notification from "./components/Notification";
 
 function App() {
   const dispatch = useDispatch();
   const [reload, setReload] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState(null);
 
   const userAuth = useSelector((state) => state.auth);
   const storyControl = useSelector((state) => state.storyControl);
@@ -40,6 +42,11 @@ function App() {
       setIsAuth(false);
     }
 
+    if (storyControl.msg !== "") {
+      setMsg(storyControl.msg);
+      setTimeout(() => setMsg(null), 5000);
+    }
+
     dispatch(allStories());
     dispatch(getAllUser());
   }, [dispatch, user, storyControl.msg]);
@@ -51,7 +58,9 @@ function App() {
       <Drawer open={open} handleClose={handleClose} />
       <Backdrop open={open} handleClose={handleClose} />
 
-      <Router />
+      {msg ? <Notification msg={msg} /> : null}
+
+      <Router setMsg={setMsg} />
     </div>
   );
 }
