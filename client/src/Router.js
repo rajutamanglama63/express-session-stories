@@ -9,7 +9,7 @@ import Register from "./pages/Register";
 import Single from "./pages/Single";
 import utilityFunc from "./utils/func";
 
-const Router = ({ setMsg }) => {
+const Router = ({ msg }) => {
   const userAuth = useSelector((state) => state.auth);
   const user = utilityFunc.getUser();
   const [isAuth, setIsAuth] = useState(false);
@@ -35,11 +35,7 @@ const Router = ({ setMsg }) => {
         <Route
           index
           element={
-            isAuth ? (
-              <Home setCurrentId={setCurrentId} setMsg={setMsg} />
-            ) : (
-              <Login />
-            )
+            isAuth ? <Home setCurrentId={setCurrentId} msg={msg} /> : <Login />
           }
         />
         <Route
@@ -50,7 +46,7 @@ const Router = ({ setMsg }) => {
           path="/single/:id"
           element={
             isAuth ? (
-              <Single setCurrentId={setCurrentId} setMsg={setMsg} />
+              <Single setCurrentId={setCurrentId} msg={msg} />
             ) : (
               <Login />
             )
@@ -60,18 +56,14 @@ const Router = ({ setMsg }) => {
           path="/create"
           element={
             isAuth ? (
-              <Create
-                currentId={currentId}
-                setCurrentId={setCurrentId}
-                setMsg={setMsg}
-              />
+              <Create currentId={currentId} setCurrentId={setCurrentId} />
             ) : (
               <Login />
             )
           }
         />
-        <Route path="/register" element={<Register setMsg={setMsg} />} />
-        <Route path="/login" element={<Login setMsg={setMsg} />} />
+        <Route path="/register" element={<Register msg={msg} />} />
+        <Route path="/login" element={<Login msg={msg} />} />
       </Route>
     </Routes>
   );

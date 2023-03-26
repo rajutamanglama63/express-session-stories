@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
+
 import utilityFunc from "./utils/func";
 import Backdrop from "./components/Backdrop";
 import Drawer from "./components/Drawer";
@@ -7,7 +9,6 @@ import Navbar from "./components/Navbar";
 import { allStories } from "./reducers/storyReducer";
 import Router from "./Router";
 import { getAllUser } from "./reducers/allUserReducer";
-import Notification from "./components/Notification";
 
 function App() {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function App() {
 
     if (storyControl.msg !== "") {
       setMsg(storyControl.msg);
-      setTimeout(() => setMsg(null), 5000);
+      // setTimeout(() => setMsg(null), 5000);
     }
 
     dispatch(allStories());
@@ -58,9 +59,8 @@ function App() {
       <Drawer open={open} handleClose={handleClose} />
       <Backdrop open={open} handleClose={handleClose} />
 
-      {msg ? <Notification msg={msg} /> : null}
-
-      <Router setMsg={setMsg} />
+      <Router msg={msg} />
+      <ToastContainer position={toast.POSITION.BOTTOM} />
     </div>
   );
 }

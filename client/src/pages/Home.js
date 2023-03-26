@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Card from "../components/Card";
 
-const Home = ({ setCurrentId }) => {
+const Home = ({ setCurrentId, msg }) => {
   const stories = useSelector((state) => state.story);
+
+  useEffect(() => {
+    if (msg !== null) {
+      toast.success(msg);
+    }
+  }, [msg]);
 
   return (
     <div className="wrapper region-sm">
