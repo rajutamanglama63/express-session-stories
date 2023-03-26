@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { storyUpdate } from "../reducers/storyControlReducer";
 import { storyCreation } from "../reducers/storyReducer";
 
-const Create = ({ currentId, setCurrentId }) => {
+const Create = ({ currentId }) => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const foundStory = useSelector((state) =>
     currentId
       ? state.story.find((eachStory) => eachStory.id === currentId)
       : null
   );
+
+  console.log("id: ", currentId);
   const [story, setStory] = useState({
     title: "",
     content: "",
@@ -39,9 +43,11 @@ const Create = ({ currentId, setCurrentId }) => {
     if (currentId === null) {
       dispatch(storyCreation(story));
       clear();
+      navigate("/");
     } else {
       dispatch(storyUpdate(currentId, story));
       clear();
+      navigate("/");
     }
   };
   return (
@@ -69,7 +75,7 @@ const Create = ({ currentId, setCurrentId }) => {
             onChange={handleInput}
           />
           <button type="submit" className="secondary-button region-margin-tn">
-            Create
+            {currentId === null ? "Create" : "Edit"}
           </button>
         </form>
       </div>

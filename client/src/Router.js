@@ -46,13 +46,7 @@ const Router = () => {
         />
         <Route
           path="/create"
-          element={
-            isAuth ? (
-              <Create currentId={currentId} setCurrentId={setCurrentId} />
-            ) : (
-              <Login />
-            )
-          }
+          element={isAuth ? <Create currentId={currentId} /> : <Login />}
         />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
