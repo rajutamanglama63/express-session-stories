@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
+// import { ToastContainer, toast } from "react-toastify";
 
 import utilityFunc from "./utils/func";
 import Backdrop from "./components/Backdrop";
@@ -15,7 +15,6 @@ function App() {
   const [reload, setReload] = useState(false);
   const [isAuth, setIsAuth] = useState(false);
   const [open, setOpen] = useState(false);
-  const [msg, setMsg] = useState(null);
 
   const userAuth = useSelector((state) => state.auth);
   const storyControl = useSelector((state) => state.storyControl);
@@ -43,11 +42,6 @@ function App() {
       setIsAuth(false);
     }
 
-    if (storyControl.msg !== "") {
-      setMsg(storyControl.msg);
-      // setTimeout(() => setMsg(null), 5000);
-    }
-
     dispatch(allStories());
     dispatch(getAllUser());
   }, [dispatch, user, storyControl.msg]);
@@ -59,8 +53,8 @@ function App() {
       <Drawer open={open} handleClose={handleClose} />
       <Backdrop open={open} handleClose={handleClose} />
 
-      <Router msg={msg} />
-      <ToastContainer position={toast.POSITION.BOTTOM} />
+      <Router />
+      {/* <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} /> */}
     </div>
   );
 }

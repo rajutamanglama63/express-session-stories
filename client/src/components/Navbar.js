@@ -51,7 +51,11 @@ const Navbar = ({ open, handleOpen, handleClose }) => {
               <NavLink to={profilePath} className="pointer text-link font-sm">
                 {user}
               </NavLink>
-              <NavLink to="/create" className="pointer text-link font-sm">
+              <NavLink
+                to="/create"
+                // onClick={() => setCurrentId(null)}
+                className="pointer text-link font-sm"
+              >
                 Create
               </NavLink>
               <button className="learn-btn" onClick={logoutHandler}>
