@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import utilityFunc from "./utils/func";
 import Backdrop from "./components/Backdrop";
@@ -23,7 +24,13 @@ function App() {
     if (userAuth.user.id) {
       setReload(true);
     }
-  }, [setReload]);
+
+    if (storyControl.msg === "Successfully updated.") {
+      toast.success("Successfully updated.");
+    } else if (storyControl.msg === "Successfully deleted.") {
+      toast.success("Successfully deleted.");
+    }
+  });
 
   const user = utilityFunc.getUser();
 
@@ -54,7 +61,7 @@ function App() {
       <Backdrop open={open} handleClose={handleClose} />
 
       <Router />
-      {/* <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} /> */}
+      <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
     </div>
   );
 }
