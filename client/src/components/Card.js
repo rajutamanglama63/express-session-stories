@@ -7,7 +7,7 @@ import Comment from "./Comment";
 import utilityFunc from "../utils/func";
 import { storyDelete } from "../reducers/storyControlReducer";
 
-const Card = ({ story, setCurrentId }) => {
+const Card = ({ story }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = utilityFunc.getUser();
@@ -23,8 +23,7 @@ const Card = ({ story, setCurrentId }) => {
   };
 
   const editHandler = (storyId) => {
-    setCurrentId(storyId);
-    navigate("/create");
+    navigate(`/edit/${storyId}`);
   };
 
   const deleteHandler = (id) => {
