@@ -18,19 +18,14 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const userAuth = useSelector((state) => state.auth);
+  const stories = useSelector((state) => state.story);
   const storyControl = useSelector((state) => state.storyControl);
 
   useEffect(() => {
     if (userAuth.user.id) {
       setReload(true);
     }
-
-    if (storyControl.msg === "Successfully updated.") {
-      toast.success("Successfully updated.");
-    } else if (storyControl.msg === "Successfully deleted.") {
-      toast.success("Successfully deleted.");
-    }
-  });
+  }, [userAuth.user.id]);
 
   const user = utilityFunc.getUser();
 
@@ -43,15 +38,21 @@ function App() {
   };
 
   useEffect(() => {
-    if (user !== null || storyControl.msg !== "") {
+    if (user !== null || stories.length !== 0 || storyControl.msg !== "") {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
 
+    if (storyControl.msg === "Successfully updated.") {
+      toast.success("Successfully updated.");
+    } else if (storyControl.msg === "Successfully deleted.") {
+      toast.success("Successfully deleted.");
+    }
+
     dispatch(allStories());
     dispatch(getAllUser());
-  }, [dispatch, user, storyControl.msg]);
+  }, [dispatch, user, storyControl.msg, stories.length]);
   return (
     <div>
       {isAuth ? (
