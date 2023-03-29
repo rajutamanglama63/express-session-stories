@@ -7,6 +7,7 @@ const Edit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { storyid } = useParams();
+
   const foundStory = useSelector((state) =>
     storyid ? state.story.find((eachStory) => eachStory.id === storyid) : null
   );
