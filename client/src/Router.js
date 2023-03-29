@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Routes, Route } from "react-router-dom";
 import Create from "./pages/Create";
+import Edit from "./pages/Edit";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
@@ -14,7 +15,6 @@ const Router = () => {
   const user = utilityFunc.getUser();
   const [isAuth, setIsAuth] = useState(false);
   const [reload, setReload] = useState(false);
-  const [currentId, setCurrentId] = useState(null);
 
   useEffect(() => {
     if (userAuth.user.id) {
@@ -32,22 +32,11 @@ const Router = () => {
   return (
     <Routes>
       <Route path="/">
-        <Route
-          index
-          element={isAuth ? <Home setCurrentId={setCurrentId} /> : <Login />}
-        />
-        <Route
-          path="/profile/:id"
-          element={isAuth ? <Profile setCurrentId={setCurrentId} /> : <Login />}
-        />
-        <Route
-          path="/single/:id"
-          element={isAuth ? <Single setCurrentId={setCurrentId} /> : <Login />}
-        />
-        <Route
-          path="/create"
-          element={isAuth ? <Create currentId={currentId} /> : <Login />}
-        />
+        <Route index element={isAuth ? <Home /> : <Login />} />
+        <Route path="/profile/:id" element={isAuth ? <Profile /> : <Login />} />
+        <Route path="/single/:id" element={isAuth ? <Single /> : <Login />} />
+        <Route path="/create" element={isAuth ? <Create /> : <Login />} />
+        <Route path="/edit/:storyid" element={isAuth ? <Edit /> : <Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Route>

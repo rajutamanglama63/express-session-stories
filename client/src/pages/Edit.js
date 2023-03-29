@@ -1,12 +1,16 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { storyUpdate } from "../reducers/storyControlReducer";
 
-import { storyCreation } from "../reducers/storyReducer";
-
-const Create = () => {
+const Edit = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { storyid } = useParams();
+
+  const foundStory = useSelector((state) =>
+    storyid ? state.story.find((eachStory) => eachStory.id === storyid) : null
+  );
 
   const [story, setStory] = useState({
     title: "",
@@ -25,10 +29,16 @@ const Create = () => {
     });
   };
 
-  const submitHandler = (e) => {
+  useEffect(() => {
+    if (foundStory) {
+      setStory(foundStory);
+    }
+  }, [foundStory]);
+
+  const editHandler = (e) => {
     e.preventDefault();
 
-    dispatch(storyCreation(story));
+    dispatch(storyUpdate(storyid, story));
     clear();
     navigate("/");
   };
@@ -36,10 +46,10 @@ const Create = () => {
     <div className="wrapper flex block-view region-md">
       <div className="container-md container-tn">
         <div className="flex block-view region-sm">
-          <h4 className="h6">Create story</h4>
-          <p className="one-font-size">Start creating your story.</p>
+          <h4 className="h6">Edit story</h4>
+          <p className="one-font-size">Edit your story.</p>
         </div>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={editHandler}>
           <input
             className="input-field region-margin-tn border-line"
             placeholder="title"
@@ -57,7 +67,7 @@ const Create = () => {
             onChange={handleInput}
           />
           <button type="submit" className="secondary-button region-margin-tn">
-            Create
+            Edit
           </button>
         </form>
       </div>
@@ -65,4 +75,4 @@ const Create = () => {
   );
 };
 
-export default Create;
+export default Edit;

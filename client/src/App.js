@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { ToastContainer, toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import utilityFunc from "./utils/func";
 import Backdrop from "./components/Backdrop";
@@ -17,13 +18,14 @@ function App() {
   const [open, setOpen] = useState(false);
 
   const userAuth = useSelector((state) => state.auth);
+  const stories = useSelector((state) => state.story);
   const storyControl = useSelector((state) => state.storyControl);
 
   useEffect(() => {
     if (userAuth.user.id) {
       setReload(true);
     }
-  }, [setReload]);
+  }, [userAuth.user.id]);
 
   const user = utilityFunc.getUser();
 
@@ -36,15 +38,21 @@ function App() {
   };
 
   useEffect(() => {
-    if (user !== null || storyControl.msg !== "") {
+    if (user !== null || stories.length !== 0 || storyControl.msg !== "") {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
 
+    if (storyControl.msg === "Successfully updated.") {
+      toast.success("Successfully updated.");
+    } else if (storyControl.msg === "Successfully deleted.") {
+      toast.success("Successfully deleted.");
+    }
+
     dispatch(allStories());
     dispatch(getAllUser());
-  }, [dispatch, user, storyControl.msg]);
+  }, [dispatch, user, storyControl.msg, stories.length]);
   return (
     <div>
       {isAuth ? (
@@ -54,7 +62,7 @@ function App() {
       <Backdrop open={open} handleClose={handleClose} />
 
       <Router />
-      {/* <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} /> */}
+      <ToastContainer position={toast.POSITION.BOTTOM_RIGHT} />
     </div>
   );
 }
